@@ -54,6 +54,7 @@ router.post('/login', function (req, res) {
                 res.send('ACCESSDENIED');
             }
         } else {
+            console.log(req.body);
             res.send('USERDOESNTEXIST');
         }
     })
