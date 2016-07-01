@@ -8,7 +8,7 @@ router.post('/one', function (req, res) {
         if (doc) {
             res.send(doc);
         } else {
-            res.send('USER DOESNT EXIST')
+            res.send('USERDOESNTEXIST')
         }
     })
 });
@@ -16,7 +16,7 @@ router.post('/one', function (req, res) {
 router.post('/create', function (req, res) {
     dbManager.findOne('users', {username: req.body.username}, function (doc) {
         if (doc) {
-            res.send('USER ALREADY EXISTS')
+            res.send('USERALREADYEXISTS')
         } else {
             var user = {
                 username: req.body.username,
@@ -37,7 +37,7 @@ router.post('/create', function (req, res) {
             
             dbManager.insert('users', user, function () {
                 dbManager.insert('passwords', pwd, function () {
-                    res.send('USER CREATED');
+                    res.send('USERCREATED');
                 })
             });
         }
@@ -51,10 +51,10 @@ router.post('/login', function (req, res) {
             if (password == doc.password) {
                 res.send('ACCESS');
             } else {
-                res.send('ACCESS DENIED');
+                res.send('ACCESSDENIED');
             }
         } else {
-            res.send('USER DOESNT EXIST');
+            res.send('USERDOESNTEXIST');
         }
     })
 })
