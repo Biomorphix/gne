@@ -12,6 +12,6 @@ app.use('/posts', posts);
 app.use('/users', users);
 app.use('/categories', categories);
 
-app.listen(1337, function () {
-  console.log('1337');
+app.listen(1239, function () {
+  console.log('1239');
 });
