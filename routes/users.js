@@ -56,7 +56,7 @@ router.post('/create', function (req, res) {
 router.post('/login', function (req, res) {
     dbManager.findOne('passwords', {username: req.body.username}, function (doc) {
         if (doc) {
-            var password = encrypt(password);
+            var password = encrypt(req.body.password);
             if (password == doc.password) {
                 res.send('ACCESS');
             } else {
