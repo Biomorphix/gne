@@ -49,13 +49,13 @@ router.post('/login', function (req, res) {
         if (doc) {
             var password = crypto.createHash('sha256', req.body.password).digest('hex');
             if (password == doc.password) {
-                res.send('ACCESS');
+                res.send({"access":"accepted"});
             } else {
-                res.send('ACCESSDENIED');
+                res.send({"access":"denied"});
             }
         } else {
             console.log(req.body);
-            res.send('USERDOESNTEXIST');
+            res.send({"access":"userdoesntexist"});
         }
     })
 })
