@@ -1,7 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var dbManager = require('./../dbManager.js');
-var crypto = require('crypto');
+var crypto = require('crypto'),
+    algorithm = 'aes-256-ctr',
+    password = 'd6F3Efeq';
+
+function encrypt(text){
+  var cipher = crypto.createCipher(algorithm, password)
+  var crypted = cipher.update(text,'utf8','hex')
+  crypted += cipher.final('hex');
+  return crypted;
+}
 
 router.post('/one', function (req, res) {
     dbManager.findOne('users', {username: req.body.username}, function (doc) {
@@ -32,7 +41,7 @@ router.post('/create', function (req, res) {
 
             var pwd = {
                 username: req.body.username,
-                password: crypto.createHash('sha256', req.body.password).digest('hex')
+                password: encrypt(req.body.password)
             }
             
             dbManager.insert('users', user, function () {
@@ -47,7 +56,7 @@ router.post('/create', function (req, res) {
 router.post('/login', function (req, res) {
     dbManager.findOne('passwords', {username: req.body.username}, function (doc) {
         if (doc) {
-            var password = crypto.createHash('sha256', req.body.password).digest('hex');
+            var password = encrypt(password);
             if (password == doc.password) {
                 res.send('ACCESS');
             } else {
