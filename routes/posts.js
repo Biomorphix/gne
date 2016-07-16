@@ -4,8 +4,12 @@ var db = require('./../dbManager.js');
 
 router.post('/', function (req, res) {
     console.log(req.body.categoryName);
-    db.findOne('posts', {categoryName: req.body.categoryName}, function (docs) {
-        res.send(docs);
+    db.find('posts', {categoryName: req.body.categoryName}, function (docs) {
+        if (docs && docs.length > 0) {
+            res.send(docs);
+        } else {
+            res.send("NotFound")
+        }
     })
 })
 
