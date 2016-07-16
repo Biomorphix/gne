@@ -8,7 +8,7 @@ router.post('/', function (req, res) {
         if (docs && docs.length > 0) {
             res.send(docs);
         } else {
-            res.send("NotFound")
+            res.send(null)
         }
     })
 })
