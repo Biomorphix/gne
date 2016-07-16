@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('./../dbManager.js');
 
 router.post('/', function (req, res) {
+    console.log(req.body.categoryName);
     db.findOne('posts', {categoryName: req.body.categoryName}, function (docs) {
         res.send(docs);
     })

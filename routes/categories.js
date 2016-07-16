@@ -18,4 +18,10 @@ router.post('/one', function (req, res) {
     })
 })
 
+router.post('/createOne', function(req, res){
+    dbManager.insert('categories', req.body, function () {
+        res.send('GOOD')
+    })
+})
+
 module.exports = router;
